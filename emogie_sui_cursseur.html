@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faire rouler sieux d'emojie avec cursseur</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-color: gray;
+        }
+
+        .face {
+            width: 80%;
+            max-width: 450px;
+            aspect-ratio: 1/1;
+            background-color: rgb(255, 213, 0);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            outline: 13px solid rgb(255, 166, 1);
+            border: 13px solid rgba(255, 187, 0, 0.9263);
+            box-shadow: 1px 1px 3px black;
+            position: absolute;
+        }
+
+        .eyes {
+            width: 80%;
+            height: 78%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .leftEye, .rightEye {
+            width: 45%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background-color: white;
+            overflow: hidden;
+            box-shadow: 1px 1px 3px gray;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .leftPupil, .rightPupil {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: black;
+        }
+
+        .mouth {
+            width: 130px;
+            height: 30px;
+            border-radius: 100px;
+            background: radial-gradient(rgb(174, 125, 33), rgb(121, 81, 51));
+            margin-bottom: 0px;
+            border: 2px solid rgb(244, 205, 113);
+            border-style: inset;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const face = document.getElementById("face");
+            const pupils = document.querySelectorAll(".pupil");
+            const move = (event) => {
+                let x = (event.clientX / (window.innerWidth / 110));
+                let y = (event.clientY / 7);
+                let fX = (event.clientX / 20);
+                let fY = (event.clientY / 20);
+                face.style.transform = `translate(${fX}px, ${fY}px)`;
+                document.body.style.backgroundColor = `rgba(${y}, ${x}, 5, 0.5)`;
+                for (const pupil of pupils) {
+                    pupil.style.transform = `translate(${x}px, ${y}px)`;
+                }
+            };
+            window.addEventListener("mousemove", move);
+        });
+    </script>
+</head>
+
+
+<body>
+    <div class="face" id="face">
+        <div class="eyes">
+            <div class="leftEye">
+                <div class="leftPupil pupil"></div>
+            </div>
+            <div class="rightEye">
+                <div class="rightPupil pupil"></div>
+            </div>
+        </div>
+        <div class="mouth"></div>
+    </div>
+</body>
+</html>
